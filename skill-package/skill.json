@@ -1,0 +1,25 @@
+{
+  "manifest": {
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "uri": "arn:aws:lambda:us-east-2:826046138677:function:ask-apiaudiomaker-default-skill-AlexaSkillFunction-MAQfNEkFKnnW"
+        },
+        "interfaces": [
+          {
+            "type": "AUDIO_PLAYER"
+          }
+        ]
+      }
+    },
+    "publishingInformation": {
+      "category": "STREAMING_SERVICE",
+      "locales": {
+        "en-US": {
+          "description": "api audio alexa integration",
+          "name": "api audio maker"
+        }
+      }
+    }
+  }
+}
