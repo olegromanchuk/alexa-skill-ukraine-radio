@@ -1,22 +1,9 @@
 const { default: axios } = require("axios");
-const apiaudio = require("apiaudio").default
-    // fill with your apiKey and your scriptId.
-    // for production version, please don't hardcode your keys.
-apiaudio.configure({ apiKey: "2eb765612f814e39bfc04cc206906dfc" });
-const SCRIPT_ID = "eb1d9be7-134c-46bb-a526-a6fd08fe0919"
 
-module.exports.getApiAudio = async function(username = "") {
+module.exports.getUkraineNews = async function(username = "") {
     try {
-        // produce text to speech
-        const speechRequest = await apiaudio.Speech.create({ scriptId: SCRIPT_ID, voice: "en-GB-RyanNeural", audience: [{ "username": username }] });
-
-        // do mastering on the speech audio files using a soundTemplate.
-        const masteringRequest = await apiaudio.Mastering.create({ scriptId: SCRIPT_ID, public: true, soundTemplate: "headlines", audience: [{ "username": username }] });
-
-        // retrieve mastered audio file url
-        const masteringResult = await apiaudio.Mastering.retrieve(SCRIPT_ID, { "username": username }, _public = true);
-        const audioUrl = masteringResult.url
-        console.log("~ mastering result", audioUrl);
+        const audioUrl = 'https://radio.nrcu.gov.ua/ur1-od-aacplus.m3u'
+        console.log("news url: ", audioUrl);
         return audioUrl;
     } catch (ex) {
         console.log(ex);

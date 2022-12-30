@@ -1,16 +1,13 @@
 const Alexa = require("ask-sdk-core");
-const { getApiAudio } = require("./util");
+const { getApiAudio, getUkraineNews } = require("./util");
 
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
     return Alexa.getRequestType(handlerInput.requestEnvelope) === "LaunchRequest";
   },
   handle(handlerInput) {
-    console.log("LaunchRequestHandler");
-    const message =
-      "Welcome to api audio news maker. Just say play and your name to begin. For example, say, play Alex.";
-    const reprompt = "You can say, play Alex, to begin.";
-    return handlerInput.responseBuilder.speak(message).reprompt(reprompt).getResponse();
+    console.log("PlaySound");
+    return controller.play(handlerInput);
   }
 };
 
@@ -81,24 +78,6 @@ const SessionEndedRequestHandler = {
   }
 };
 
-const PlaySoundIntentHandler = {
-  async canHandle(handlerInput) {
-    return (
-      Alexa.getRequestType(handlerInput.requestEnvelope) === "IntentRequest" &&
-      Alexa.getIntentName(handlerInput.requestEnvelope) === "PlaySoundIntent"
-    );
-  },
-  handle(handlerInput) {
-    console.log("PlaySound");
-    const speechText = handlerInput.requestEnvelope.request.intent.slots.nameQuery.value;
-    if (speechText) {
-      return controller.play(handlerInput, speechText);
-    } else {
-      return handlerInput.responseBuilder.speak("You can say, play alex, to begin.").getResponse();
-    }
-  }
-};
-
 // Generic error handling to capture any syntax or routing errors. If you receive an error
 // stating the request handler chain is not found, you have not implemented a handler for
 // the intent being invoked or included it in the skill builder below.
@@ -152,13 +131,14 @@ const AudioPlayerEventHandler = {
 };
 
 const controller = {
-  async play(handlerInput, query) {
-    const url = await getApiAudio(query);
+  async play(handlerInput) {
+    const url = await getUkraineNews();
     const { responseBuilder } = handlerInput;
     const playBehavior = "REPLACE_ALL";
     console.log("play");
     responseBuilder
-      .speak(`Playing news for ${query}`)
+      // .speak(`Playing news for ${query}`)
+      .speak('Yo-hooo! You got it right!!! The latest news from Ukraine Odessa is playing...')
       .withShouldEndSession(true)
       .addAudioPlayerPlayDirective(playBehavior, url, url, 0, null);
     return responseBuilder.getResponse();
@@ -175,7 +155,6 @@ exports.handler = Alexa.SkillBuilders.custom()
   .addRequestHandlers(
     CheckAudioInterfaceHandler,
     LaunchRequestHandler,
-    PlaySoundIntentHandler,
     SystemExceptionHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,

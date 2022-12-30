@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "api audio maker",
+      "invocationName": "real ukraine news",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",

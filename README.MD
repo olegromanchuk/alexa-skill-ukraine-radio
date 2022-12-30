@@ -1,4 +1,10 @@
-# Aflorithmic Alexa Integration
+# Ukraine news skill for Alexa
+News source: [https://radio.nrcu.gov.ua](https://radio.nrcu.gov.ua)
+
+Use: "Alexa, play real ukraine news"
+
+#### Based on Aflorithmic Alexa Integration
+[https://www.aflorithmic.ai/post/creating-an-alexa-audio-streaming-skill-with-api-audio](https://www.aflorithmic.ai/post/creating-an-alexa-audio-streaming-skill-with-api-audio)
 
 npm install apiaudio apiaudio
 
